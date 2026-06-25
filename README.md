@@ -32,4 +32,4 @@ Adjust the first sentence if the extension is not standalone (for example Redire
 
 ---
 
-Built by **[Mr Cheese](https://www.mrcheese.co.uk)** · MIT licensed extensions
+Built by **[Mr Cheese](https://www.mrcheese.co.uk)** · extensions under the [Mr Cheese Extension License v1.0](https://www.mrcheese.co.uk/extension-license)
