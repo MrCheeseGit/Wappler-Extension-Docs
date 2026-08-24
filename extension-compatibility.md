@@ -29,6 +29,7 @@ These work without other Mr Cheese extensions:
 | [Generate Auth Code](https://github.com/MrCheeseGit/Wappler-Generate-Auth-Code-Extension) | Server Connect | OTP / tokens |
 | [Cache Machine](https://github.com/MrCheeseGit/Wappler-Cache-Machine-Extension) | Server Connect | Optional Redis |
 | [DataDump Export](https://github.com/MrCheeseGit/Wappler-Data-Dump-Export-PDF-CSV-Excel-Extension) | App Connect | Font Awesome on layout; pdfmake / SheetJS load from CDN unless self-hosted |
+| [Great Range Picker](https://github.com/MrCheeseGit/greatRangePicker) | App Connect | Font Awesome on layout; Bootstrap 5 buttons; popover portaled to `document.body` |
 
 ---
 
@@ -144,6 +145,24 @@ Use the extension’s test API from the PuSH-IT examples. Confirm `sent: 1` in t
 
 ---
 
+## Great Range Picker
+
+**Type:** App Connect only.
+
+| Piece | Notes |
+|-------|--------|
+| `dmx-great-range-picker` | Preset sidebar, dual calendar, full-width trigger |
+| Font Awesome | Chevron icons on trigger and month navigation |
+| Bootstrap 5 | Apply / Cancel use `btn`, `btn-primary`, `btn-link` |
+| `default-preset` | Initial range when Start/End date fields are empty (Today, Last 30 days, Next 30 days, YTD, etc.) |
+| `color-scheme` | `dark`, `light`, or `auto` (system preference). Theme applies to trigger and body-portaled popover. Use **light** on dark host pages; the picker resets Bootstrap tokens inside its scope. |
+| `placement` | `modal` centres popover in nearest Bootstrap dialog; `trigger` anchors below the button |
+| `timezone` | IANA zone for Today and preset boundaries (e.g. `Europe/Lisbon`) |
+
+Popover is moved to `document.body` when open so modals and `overflow: hidden` panels do not clip it. Bind `{{component.data.dateFrom}}`, `{{component.data.dateTo}}`, and `{{component.data.preset}}`, or handle `dmx-on:changed`.
+
+---
+
 ## Troubleshooting quick reference
 
 | Symptom | Likely cause |
@@ -154,6 +173,7 @@ Use the extension’s test API from the PuSH-IT examples. Confirm `sent: 1` in t
 | Test push works, login push does not | Same as above, or no active row for that `user_uuid` in your subscriptions table |
 | Subscribe UI errors on status API | Update `dmx-pushit-subscribe` to latest; status API must return `findActive.active` or `subscribed` |
 | Component missing in Wappler picker | `npm install`, Project Updater, quit Wappler fully, reopen |
+| Great Range Picker light mode still looks dark | Set **Color scheme** to `light` (not `auto` on a dark OS). Host `color-scheme: dark` on date inputs is overridden inside the picker in v1.0.0+. |
 | Service worker 404 | Copy `pushit_service_worker.js` to `public/` and redeploy |
 
 ---
@@ -171,6 +191,7 @@ Use the extension’s test API from the PuSH-IT examples. Confirm `sent: 1` in t
 | TipWap | [Wappler-TipWap-Tiptap-Extension](https://github.com/MrCheeseGit/Wappler-TipWap-Extension) |
 | Pretty Good Database | [Wappler-Pretty-Good-Database-Extension](https://github.com/MrCheeseGit/Wappler-Pretty-Good-Database-Extension) |
 | DataDump Export | [Wappler-Data-Dump-Export-PDF-CSV-Excel-Extension](https://github.com/MrCheeseGit/Wappler-Data-Dump-Export-PDF-CSV-Excel-Extension) |
+| Great Range Picker | [greatRangePicker](https://github.com/MrCheeseGit/greatRangePicker) |
 | Wap-Lastic | [Wap-Lastic-Wappler-Elastic-Search-Extension](https://github.com/MrCheeseGit/Wap-Lastic-Wappler-Elastic-Search-Extension) |
 
 ---
@@ -179,4 +200,6 @@ Use the extension’s test API from the PuSH-IT examples. Confirm `sent: 1` in t
 
 | Date | Change |
 |------|--------|
+| 2026-08-24 | Great Range Picker v1.0.0 docs: default date range, color scheme (incl. light on dark hosts) |
+| 2026-08-24 | Added Great Range Picker (standalone App Connect; default date range, color scheme, modal-safe popover) |
 | 2026-06-20 | Initial public compatibility guide (Redirect-IT step order, PuSH-IT login push, baseline table) |
