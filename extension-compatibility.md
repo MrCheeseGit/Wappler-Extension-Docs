@@ -155,6 +155,8 @@ Use the extension’s test API from the PuSH-IT examples. Confirm `sent: 1` in t
 | Font Awesome | Chevron icons on trigger and month navigation |
 | Bootstrap 5 | Apply / Cancel use `btn`, `btn-primary`, `btn-link` |
 | `default-preset` | Initial range when Start/End date fields are empty (Today, Last 30 days, Next 30 days, YTD, etc.) |
+| `display-format` | Trigger summary only: `DD/MM/YYYY`, `DD-MM-YYYY`, `MM/DD/YYYY`, `YYYY-MM-DD`, or locale default. Native Start/End date inputs follow the browser. |
+| `blocked-dates` | Bind unavailable `YYYY-MM-DD` values (comma-separated or JSON array). Days disabled in calendar; Apply rejected if range spans a blocked day. |
 | `color-scheme` | `dark`, `light`, or `auto` (system preference). Theme applies to trigger and body-portaled popover. Use **light** on dark host pages; the picker resets Bootstrap tokens inside its scope. |
 | `placement` | `modal` centres popover in nearest Bootstrap dialog; `trigger` anchors below the button |
 | `timezone` | IANA zone for Today and preset boundaries (e.g. `Europe/Lisbon`) |
@@ -174,6 +176,8 @@ Popover is moved to `document.body` when open so modals and `overflow: hidden` p
 | Subscribe UI errors on status API | Update `dmx-pushit-subscribe` to latest; status API must return `findActive.active` or `subscribed` |
 | Component missing in Wappler picker | `npm install`, Project Updater, quit Wappler fully, reopen |
 | Great Range Picker light mode still looks dark | Set **Color scheme** to `light` (not `auto` on a dark OS). Host `color-scheme: dark` on date inputs is overridden inside the picker in v1.0.0+. |
+| Great Range Picker Start/End show wrong date pattern | Native `<input type="date">` format is browser-controlled. Use **Display format** for the trigger button only (v1.1.0+). |
+| Great Range Picker Apply blocked | Range includes a **Blocked dates** day; narrow the range or refresh the bound date list from your query. |
 | Service worker 404 | Copy `pushit_service_worker.js` to `public/` and redeploy |
 
 ---
@@ -200,6 +204,7 @@ Popover is moved to `document.body` when open so modals and `overflow: hidden` p
 
 | Date | Change |
 |------|--------|
+| 2026-08-25 | Great Range Picker v1.1.0: display format (trigger), blocked dates for bookings/events |
 | 2026-08-24 | Great Range Picker v1.0.0 docs: default date range, color scheme (incl. light on dark hosts) |
 | 2026-08-24 | Added Great Range Picker (standalone App Connect; default date range, color scheme, modal-safe popover) |
 | 2026-06-20 | Initial public compatibility guide (Redirect-IT step order, PuSH-IT login push, baseline table) |
