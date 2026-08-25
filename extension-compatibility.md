@@ -30,6 +30,7 @@ These work without other Mr Cheese extensions:
 | [Cache Machine](https://github.com/MrCheeseGit/Wappler-Cache-Machine-Extension) | Server Connect | Optional Redis |
 | [DataDump Export](https://github.com/MrCheeseGit/Wappler-Data-Dump-Export-PDF-CSV-Excel-Extension) | App Connect | Font Awesome on layout; pdfmake / SheetJS load from CDN unless self-hosted |
 | [Great Range Picker](https://github.com/MrCheeseGit/greatRangePicker) | App Connect | Font Awesome on layout; Bootstrap 5 buttons; popover portaled to `document.body` |
+| [Great Range Time Picker](https://github.com/MrCheeseGit/greatRangeTimePicker) | App Connect | Date + time range; optional presets (off by default); pairs with Great Range Picker when both are needed |
 
 ---
 
@@ -41,6 +42,7 @@ These work without other Mr Cheese extensions:
 | **Rich text CMS** | TipWap + Server Connect sanitize | Editor in App Connect, `tipwap_sanitize` before insert |
 | **Login hardening** | BeeGone Honeypot + Redirect-IT | Bot guard on form, redirect after API login |
 | **Login notify** | PuSH-IT + Redirect-IT | Push on sign-in, then redirect (see below) |
+| **Reports + bookings** | Great Range Picker + Great Range Time Picker | Date-only filters on dashboards; date + time ranges for events and availability |
 
 ---
 
@@ -165,6 +167,30 @@ Popover is moved to `document.body` when open so modals and `overflow: hidden` p
 
 ---
 
+## Great Range Time Picker
+
+**Type:** App Connect only. Sibling to [Great Range Picker](#great-range-picker): use this when you need **start/end times** (bookings, events, availability). Preset sidebar is **off by default**; enable **Show preset sidebar** for report-style filters.
+
+| Piece | Notes |
+|-------|--------|
+| `dmx-great-range-time-picker` | Start/end date + time fields, dual calendar, full-width trigger |
+| Font Awesome | Chevron icons on trigger and month navigation |
+| Bootstrap 5 | Apply / Cancel use `btn`, `btn-primary`, `btn-link` |
+| `time-from` / `time-to` | 24-hour `HH:MM`; bind `{{component.data.timeFrom}}` and `{{component.data.timeTo}}` |
+| `default-time-from` / `default-time-to` | Defaults when times are empty (`00:00` / `23:59`) |
+| `time-step` | Native time input step in seconds (default `900` = 15 minutes) |
+| `show-presets` | Optional preset sidebar (default off) |
+| `default-preset` | Initial date range when Start/End date fields are empty (`custom` uses today through +7 days) |
+| `display-format` | Trigger summary dates only; times always show as `HH:MM` on the trigger |
+| `blocked-dates` | Bind unavailable `YYYY-MM-DD` values (comma-separated or JSON array) |
+| `color-scheme` | `dark`, `light`, or `auto` |
+| `placement` | `modal` centres popover in nearest Bootstrap dialog; `trigger` anchors below the button |
+| `timezone` | IANA zone for Today and preset boundaries |
+
+Bind `{{component.data.dateFrom}}`, `{{component.data.dateTo}}`, `{{component.data.timeFrom}}`, `{{component.data.timeTo}}`, and `{{component.data.preset}}`, or handle `dmx-on:changed` (detail includes all five).
+
+---
+
 ## Troubleshooting quick reference
 
 | Symptom | Likely cause |
@@ -178,6 +204,8 @@ Popover is moved to `document.body` when open so modals and `overflow: hidden` p
 | Great Range Picker light mode still looks dark | Set **Color scheme** to `light` (not `auto` on a dark OS). Host `color-scheme: dark` on date inputs is overridden inside the picker in v1.0.0+. |
 | Great Range Picker Start/End show wrong date pattern | Native `<input type="date">` format is browser-controlled. Use **Display format** for the trigger button only (v1.1.0+). |
 | Great Range Picker Apply blocked | Range includes a **Blocked dates** day; narrow the range or refresh the bound date list from your query. |
+| Great Range Time Picker times missing on Apply | Set **Start time** / **End time** or configure **Default start time** / **Default end time** (`00:00` / `23:59` by default). |
+| Great Range Time Picker preset sidebar missing | **Show preset sidebar** defaults off; enable it in component properties for report-style filters. |
 | Service worker 404 | Copy `pushit_service_worker.js` to `public/` and redeploy |
 
 ---
@@ -196,6 +224,7 @@ Popover is moved to `document.body` when open so modals and `overflow: hidden` p
 | Pretty Good Database | [Wappler-Pretty-Good-Database-Extension](https://github.com/MrCheeseGit/Wappler-Pretty-Good-Database-Extension) |
 | DataDump Export | [Wappler-Data-Dump-Export-PDF-CSV-Excel-Extension](https://github.com/MrCheeseGit/Wappler-Data-Dump-Export-PDF-CSV-Excel-Extension) |
 | Great Range Picker | [greatRangePicker](https://github.com/MrCheeseGit/greatRangePicker) |
+| Great Range Time Picker | [greatRangeTimePicker](https://github.com/MrCheeseGit/greatRangeTimePicker) |
 | Wap-Lastic | [Wap-Lastic-Wappler-Elastic-Search-Extension](https://github.com/MrCheeseGit/Wap-Lastic-Wappler-Elastic-Search-Extension) |
 
 ---
@@ -204,6 +233,7 @@ Popover is moved to `document.body` when open so modals and `overflow: hidden` p
 
 | Date | Change |
 |------|--------|
+| 2026-08-25 | Great Range Time Picker v0.1.0: date + time range, optional presets, blocked dates |
 | 2026-08-25 | Great Range Picker v1.1.0: display format (trigger), blocked dates for bookings/events |
 | 2026-08-24 | Great Range Picker v1.0.0 docs: default date range, color scheme (incl. light on dark hosts) |
 | 2026-08-24 | Added Great Range Picker (standalone App Connect; default date range, color scheme, modal-safe popover) |
